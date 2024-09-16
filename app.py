@@ -61,10 +61,7 @@ def add_sidebar():
       value=float(data[key].mean())
     )
 
-  st.sidebar.markdown("<hr/>", unsafe_allow_html=True)
-  st.sidebar.markdown('''
-  🧑🏻‍💻 Created by [Luis Jose Mendez](https://github.com/mendez-luisjose).
-  ''')
+  
 
   return input_dict
 
@@ -146,10 +143,7 @@ def add_predictions(input_data) :
       st.write("<span class='diagnosis rain'>Rain</span>", unsafe_allow_html=True)
     elif pred_result == 2:
       st.write("<span class='diagnosis sun'>Sun</span>", unsafe_allow_html=True)
-    elif pred_result == 3 :
-      st.write("<span class='diagnosis snow'>Snow</span>", unsafe_allow_html=True)
-    elif pred_result == 4 :
-      st.write("<span class='diagnosis fog'>Fog</span>", unsafe_allow_html=True)
+    
     
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1 :
@@ -161,14 +155,8 @@ def add_predictions(input_data) :
     with col3: 
         st.metric("Probability:", f"{prob_sun}%", "Sun")
 
-    col4, col5 = st.columns([1, 1])
-    with col4 :
-        st.metric("Probability:", f"{prob_snow}%", "Snow")
-    
-    with col5:
-        st.metric("Probability:", f"{prob_fog}%", "Fog")
 
-    st.write("`This Artificial Intelligence can Assist for any Scientific about the Upcoming Weather, but Should Not be used as a Substitute for a Final Diagnosis and Prediction.`")
+
     
 
 def main() :  
