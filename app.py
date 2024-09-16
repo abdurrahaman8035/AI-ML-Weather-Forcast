@@ -34,7 +34,7 @@ def get_clean_data():
 
 #Sidebar of the Streamlit App
 def add_sidebar():
-  st.sidebar.header("Community Based Weather Forcasting System"")
+  st.sidebar.header("Community Based Weather Forcasting System")
   image = np.array(Image.open(IMG_SIDEBAR_PATH))
   st.sidebar.image(image)
   st.sidebar.markdown("<hr/>", unsafe_allow_html=True)
