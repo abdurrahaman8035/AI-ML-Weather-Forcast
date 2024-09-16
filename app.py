@@ -34,21 +34,20 @@ def get_clean_data():
 
 #Sidebar of the Streamlit App
 def add_sidebar():
-  st.sidebar.header("Weather Predictor `App ⛈️`")
+  st.sidebar.header("Community Based Weather Forcasting System")
   image = np.array(Image.open(IMG_SIDEBAR_PATH))
   st.sidebar.image(image)
   st.sidebar.markdown("<hr/>", unsafe_allow_html=True)
-  st.sidebar.write("This Artificial Intelligence App can Predicts the Future Weather Given their Corresponding Parameters.")
 
-  st.sidebar.subheader('Select the Weather Parameters ✅:')
+  st.sidebar.subheader('Select the Weather Parameters:')
   
   data = get_clean_data()
   
   slider_labels = [
-        ("Precipitation", "precipitation"),
-        ("Max Temperature", "temp_max"),
-        ("Min Temperature", "temp_min"),
-        ("Wind", "wind"),
+        ("Humidity", "precipitation"),
+        ("Max Temperature of the Day", "temp_max"),
+        ("Min Temperature of the Day", "temp_min"),
+        ("Wind Strength", "wind"),
     ]
 
   input_dict = {}
@@ -62,9 +61,7 @@ def add_sidebar():
     )
 
   st.sidebar.markdown("<hr/>", unsafe_allow_html=True)
-  st.sidebar.markdown('''
-  🧑🏻‍💻 Created by [Luis Jose Mendez](https://github.com/mendez-luisjose).
-  ''')
+  
 
   return input_dict
 
@@ -146,10 +143,6 @@ def add_predictions(input_data) :
       st.write("<span class='diagnosis rain'>Rain</span>", unsafe_allow_html=True)
     elif pred_result == 2:
       st.write("<span class='diagnosis sun'>Sun</span>", unsafe_allow_html=True)
-    elif pred_result == 3 :
-      st.write("<span class='diagnosis snow'>Snow</span>", unsafe_allow_html=True)
-    elif pred_result == 4 :
-      st.write("<span class='diagnosis fog'>Fog</span>", unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1 :
@@ -161,19 +154,10 @@ def add_predictions(input_data) :
     with col3: 
         st.metric("Probability:", f"{prob_sun}%", "Sun")
 
-    col4, col5 = st.columns([1, 1])
-    with col4 :
-        st.metric("Probability:", f"{prob_snow}%", "Snow")
-    
-    with col5:
-        st.metric("Probability:", f"{prob_fog}%", "Fog")
-
-    st.write("`This Artificial Intelligence can Assist for any Scientific about the Upcoming Weather, but Should Not be used as a Substitute for a Final Diagnosis and Prediction.`")
-    
 
 def main() :  
     st.set_page_config(
-        page_title="Weather Predictor",
+        page_title="Community Based Weather Forcasting System",
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -201,44 +185,12 @@ def main() :
     )    
 
     with st.container() :
-        st.title("Weather Predictor ⛅️")
-        st.write("This App predicts using a KNeighborsClassifier Machine Learning Model whether a given parameters the Upcoming Weather is eather Drizzle, Sun, Snow, Fog or Rain. You can also Update the measurements by hand using sliders in the sidebar.")
+        st.title("Community Based Weather Forcasting System")
+        st.write("CASE STUDY: Geidam Local Government")
+        st.write("BY: BAKURA ABDULKARIM (U/CS/19/101)")
         st.markdown("<hr/>", unsafe_allow_html=True)
     
-    col1, col2 = st.columns([2, 1])
-
-    df = pd.read_csv("./assets/weather_classes.csv")
-
-    with col1:
-        st.markdown('### Radar Chart of the Parameters 📊')
-        radar_chart = get_radar_chart(input_data)
-        st.plotly_chart(radar_chart)
-
-        st.markdown('### Bar Chart of the Weather Classes 📉')
-        st.markdown("---", unsafe_allow_html=True)
-
-        plost.bar_chart(
-            data=df,
-            bar='Weather',
-            value='Number of that Class', 
-            legend='bottom',
-            use_container_width=True,
-            color='Weather')        
-        
-
-    with col2:
-        st.markdown('### Donut Chart of the Weather Classes 📈')
-
-        plost.donut_chart(
-            data=df,
-            theta="Number of that Class",
-            color='Weather',
-            legend='bottom', 
-            use_container_width=True)
-        
-        st.markdown("<hr/>", unsafe_allow_html=True)
-        add_predictions(input_data)
-
+    
 if __name__ == "__main__" :
     main()
 
