@@ -133,7 +133,7 @@ def add_predictions(input_data) :
 
 def main() :  
     st.set_page_config(
-        page_title="Weather Predictor",
+        page_title="Community Based Weather Forcasting System",
         layout="wide",
         initial_sidebar_state="expanded"
     )
