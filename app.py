@@ -193,15 +193,7 @@ def main() :
         st.write("This App predicts using a KNeighborsClassifier Machine Learning Model whether a given parameters the Upcoming Weather is eather Drizzle, Sun, Snow, Fog or Rain. You can also Update the measurements by hand using sliders in the sidebar.")
         st.markdown("<hr/>", unsafe_allow_html=True)
     
-    col1, col2 = st.columns([2, 1])
-
-    df = pd.read_csv("./assets/weather_classes.csv")
-
-    with col1:
-              
-        
-
-    with col2:
+    
         
         
         st.markdown("<hr/>", unsafe_allow_html=True)
