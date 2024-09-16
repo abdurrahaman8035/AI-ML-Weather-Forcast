@@ -189,7 +189,39 @@ def main() :
         st.write("CASE STUDY: Geidam Local Government")
         st.write("BY: BAKURA ABDULKARIM (U/CS/19/101)")
         st.markdown("<hr/>", unsafe_allow_html=True)
-    
+     col1, col2 = st.columns([2, 1])
+
+    df = pd.read_csv("./assets/weather_classes.csv")
+
+    with col1:
+        st.markdown('### Radar Chart of the Parameters 📊')
+        radar_chart = get_radar_chart(input_data)
+        st.plotly_chart(radar_chart)
+
+        st.markdown('### Bar Chart of the Weather Classes 📉')
+        st.markdown("---", unsafe_allow_html=True)
+
+        plost.bar_chart(
+            data=df,
+            bar='Weather',
+            value='Number of that Class', 
+            legend='bottom',
+            use_container_width=True,
+            color='Weather')        
+
+
+    with col2:
+        st.markdown('### Donut Chart of the Weather Classes 📈')
+
+        plost.donut_chart(
+            data=df,
+            theta="Number of that Class",
+            color='Weather',
+            legend='bottom', 
+            use_container_width=True)
+
+        st.markdown("<hr/>", unsafe_allow_html=True)
+        add_predictions(input_data)
     
 if __name__ == "__main__" :
     main()
