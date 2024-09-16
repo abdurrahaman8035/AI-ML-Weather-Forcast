@@ -34,11 +34,10 @@ def get_clean_data():
 
 #Sidebar of the Streamlit App
 def add_sidebar():
-  st.sidebar.header("Weather Predictor `App ⛈️`")
+  st.sidebar.header("Community Based Weather Forcasting System"")
   image = np.array(Image.open(IMG_SIDEBAR_PATH))
   st.sidebar.image(image)
   st.sidebar.markdown("<hr/>", unsafe_allow_html=True)
-  st.sidebar.write("This Artificial Intelligence App can Predicts the Future Weather Given their Corresponding Parameters.")
 
   st.sidebar.subheader('Select the Weather Parameters ✅:')
   
@@ -80,33 +79,6 @@ def get_scaled_values(input_dict):
   
   return scaled_dict
 
-#Radar Chart Function
-def get_radar_chart(input_data):
-  input_data = get_scaled_values(input_data)
-  
-  categories = ['Precipitation', 'Max Temperature', 'Min Temperature', 'Wind']
-
-  fig = go.Figure()
-
-  fig.add_trace(go.Scatterpolar(
-        r=[
-          input_data['precipitation'], input_data['temp_max'], input_data['temp_min'],
-          input_data['wind']
-        ],
-        theta=categories,
-        fill='toself',
-        name='Mean Value'
-  ))
-  fig.update_layout(
-    polar=dict(
-      radialaxis=dict(
-        visible=True,
-        range=[0, 1]
-      )),
-    showlegend=True
-  )
-  
-  return fig
 
 #Receiving Prediction Results from the API
 def add_predictions(input_data) :
@@ -189,12 +161,9 @@ def main() :
     )    
 
     with st.container() :
-        st.title("Weather Predictor ⛅️")
-        st.write("This App predicts using a KNeighborsClassifier Machine Learning Model whether a given parameters the Upcoming Weather is eather Drizzle, Sun, Snow, Fog or Rain. You can also Update the measurements by hand using sliders in the sidebar.")
-        st.markdown("<hr/>", unsafe_allow_html=True)
-    
-    
-        
+        st.title("Community Based Weather Forcasting System")
+        st.write("CASE STUDY: Geidam Local Government")
+        st.write("BY: BAKURA ABDULKARIM (U/CS/19/101)")
         
         st.markdown("<hr/>", unsafe_allow_html=True)
         add_predictions(input_data)
