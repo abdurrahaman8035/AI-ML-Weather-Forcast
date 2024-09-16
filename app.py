@@ -83,33 +83,7 @@ def get_scaled_values(input_dict):
   
   return scaled_dict
 
-#Radar Chart Function
-def get_radar_chart(input_data):
-  input_data = get_scaled_values(input_data)
-  
-  categories = ['Precipitation', 'Max Temperature', 'Min Temperature', 'Wind']
 
-  fig = go.Figure()
-
-  fig.add_trace(go.Scatterpolar(
-        r=[
-          input_data['precipitation'], input_data['temp_max'], input_data['temp_min'],
-          input_data['wind']
-        ],
-        theta=categories,
-        fill='toself',
-        name='Mean Value'
-  ))
-  fig.update_layout(
-    polar=dict(
-      radialaxis=dict(
-        visible=True,
-        range=[0, 1]
-      )),
-    showlegend=True
-  )
-  
-  return fig
 
 #Receiving Prediction Results from the API
 def add_predictions(input_data) :
@@ -146,10 +120,7 @@ def add_predictions(input_data) :
       st.write("<span class='diagnosis rain'>Rain</span>", unsafe_allow_html=True)
     elif pred_result == 2:
       st.write("<span class='diagnosis sun'>Sun</span>", unsafe_allow_html=True)
-    elif pred_result == 3 :
-      st.write("<span class='diagnosis snow'>Snow</span>", unsafe_allow_html=True)
-    elif pred_result == 4 :
-      st.write("<span class='diagnosis fog'>Fog</span>", unsafe_allow_html=True)
+    
     
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1 :
@@ -161,13 +132,7 @@ def add_predictions(input_data) :
     with col3: 
         st.metric("Probability:", f"{prob_sun}%", "Sun")
 
-    col4, col5 = st.columns([1, 1])
-    with col4 :
-        st.metric("Probability:", f"{prob_snow}%", "Snow")
     
-    with col5:
-        st.metric("Probability:", f"{prob_fog}%", "Fog")
-
     st.write("`This Artificial Intelligence can Assist for any Scientific about the Upcoming Weather, but Should Not be used as a Substitute for a Final Diagnosis and Prediction.`")
     
 
@@ -205,40 +170,10 @@ def main() :
         st.write("This App predicts using a KNeighborsClassifier Machine Learning Model whether a given parameters the Upcoming Weather is eather Drizzle, Sun, Snow, Fog or Rain. You can also Update the measurements by hand using sliders in the sidebar.")
         st.markdown("<hr/>", unsafe_allow_html=True)
     
-    col1, col2 = st.columns([2, 1])
-
-    df = pd.read_csv("./assets/weather_classes.csv")
-
-    with col1:
-        st.markdown('### Radar Chart of the Parameters 📊')
-        radar_chart = get_radar_chart(input_data)
-        st.plotly_chart(radar_chart)
-
-        st.markdown('### Bar Chart of the Weather Classes 📉')
-        st.markdown("---", unsafe_allow_html=True)
-
-        plost.bar_chart(
-            data=df,
-            bar='Weather',
-            value='Number of that Class', 
-            legend='bottom',
-            use_container_width=True,
-            color='Weather')        
+           
         
 
-    with col2:
-        st.markdown('### Donut Chart of the Weather Classes 📈')
-
-        plost.donut_chart(
-            data=df,
-            theta="Number of that Class",
-            color='Weather',
-            legend='bottom', 
-            use_container_width=True)
-        
-        st.markdown("<hr/>", unsafe_allow_html=True)
-        add_predictions(input_data)
-
+    
 if __name__ == "__main__" :
     main()
 
